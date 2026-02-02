@@ -1,8 +1,8 @@
 """Main CLI interface for Midna"""
 
+import importlib.metadata
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
-import importlib.metadata
 
 from .checker import check_installed_packages
 from .discovery import auto_discover_requirements
@@ -13,7 +13,11 @@ from .uninstaller import check_packages_to_uninstall, uninstall_packages
 
 
 def create_parser() -> ArgumentParser:
-    """Create and configure the argument parser"""
+    """Create and configure the argument parser.
+
+    Returns:
+        ArgumentParser: Configured argument parser with all CLI options
+    """
     parser = ArgumentParser(
         description=(
             "Midna - Smart pip requirements installer and package manager.\n"
@@ -95,7 +99,11 @@ def create_parser() -> ArgumentParser:
 
 
 def main() -> int:
-    """Main entry point for Midna"""
+    """Main entry point for Midna CLI.
+
+    Returns:
+        int: Exit code (0 for success, non-zero for errors)
+    """
     parser = create_parser()
     args = parser.parse_args()
 

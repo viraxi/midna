@@ -12,7 +12,17 @@ else:
 
 
 def read_requirements(file_path: str) -> List[str]:
-    """Read and parse requirements from a file"""
+    """Read and parse requirements from a file.
+
+    Args:
+        file_path: Path to requirements file (txt, toml, etc.)
+
+    Returns:
+        List of package specifications
+
+    Raises:
+        FileNotFoundError: If the requirements file doesn't exist
+    """
     logger = logging.getLogger("midna")
     logger.info(f"Reading requirements from: {file_path}")
 
@@ -79,6 +89,18 @@ def read_requirements(file_path: str) -> List[str]:
 
 
 def parse_toml_requirements(file_path: str) -> List[str]:
+    """Parse requirements from a TOML file (pyproject.toml).
+
+    Args:
+        file_path: Path to TOML file
+
+    Returns:
+        List of package specifications
+
+    Raises:
+        FileNotFoundError: If file doesn't exist
+        Exception: If TOML parsing fails
+    """
     """Parse requirements from a TOML file (pyproject.toml)"""
     logger = logging.getLogger("midna")
 
@@ -125,6 +147,14 @@ def parse_toml_requirements(file_path: str) -> List[str]:
 
 
 def parse_package_name(package_spec: str) -> str:
+    """Extract package name from a package specification.
+
+    Args:
+        package_spec: Package specification (e.g., 'requests>=2.0.0', 'numpy==1.19.0')
+
+    Returns:
+        Package name without version specifiers
+    """
     """Extract package name from package specification"""
     import re
 

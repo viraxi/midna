@@ -10,7 +10,17 @@ from .parser import parse_package_name
 def check_installed_packages(
     packages: List[str],
 ) -> Tuple[List[str], List[str]]:
-    """Check which packages are installed and which are missing"""
+    """Check which packages are installed and which are missing.
+
+    Args:
+        packages: List of package names to check
+
+    Returns:
+        Tuple of two lists: (missing_packages, already_installed)
+
+    Raises:
+        subprocess.CalledProcessError: If pip list command fails
+    """
     logger = logging.getLogger("midna")
     logger.info("Checking installed packages...")
 

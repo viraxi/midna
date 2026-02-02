@@ -31,7 +31,14 @@ IGNORED_MODULES = {
 
 
 def is_stdlib_package(package_name: str) -> bool:
-    """Check if a package is part of Python's standard library"""
+    """Check if a package is part of Python's standard library.
+
+    Args:
+        package_name: Name of the package to check
+
+    Returns:
+        True if package is in standard library, False otherwise
+    """
     # Check if it's in our known stdlib modules
     if package_name in STDLIB_MODULES:
         return True
@@ -55,7 +62,15 @@ def is_stdlib_package(package_name: str) -> bool:
 
 
 def is_project_package(package_name: str, project_root: str) -> bool:
-    """Check if a package is part of the current project"""
+    """Check if a package is part of the current project.
+
+    Args:
+        package_name: Name of the package to check
+        project_root: Root directory of the project
+
+    Returns:
+        True if package is part of the project, False otherwise
+    """
     if package_name in IGNORED_MODULES:
         return True
 
@@ -73,7 +88,14 @@ def is_project_package(package_name: str, project_root: str) -> bool:
 
 
 def get_package_version(package_name: str) -> str:
-    """Get the installed version of a package"""
+    """Get the installed version of a package.
+
+    Args:
+        package_name: Name of the package
+
+    Returns:
+        Version string if found, empty string otherwise
+    """
     try:
         # Try getting version from importlib.metadata first
         return str(distribution(package_name).version)
@@ -93,10 +115,17 @@ def get_package_version(package_name: str) -> str:
 def classify_packages(
     packages: Set[str], project_root: str
 ) -> Tuple[List[str], List[str], List[Tuple[str, str]]]:
-    """
-    Classify packages into stdlib, project, and third-party packages
-    Returns: (stdlib_packages, project_packages, third_party_packages)
-    third_party_packages is a list of (name, version) tuples
+    """Classify packages into stdlib, project, and third-party packages.
+
+    Args:
+        packages: Set of package names to classify
+        project_root: Root directory of the project
+
+    Returns:
+        Tuple of three lists:
+        - stdlib_packages: List of standard library package names
+        - project_packages: List of project-local package names
+        - third_party_packages: List of (name, version) tuples for external packages
     """
     stdlib_packages: List[str] = []
     project_packages: List[str] = []

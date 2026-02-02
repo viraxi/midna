@@ -8,7 +8,15 @@ from .parser import parse_package_name, read_requirements
 
 
 def uninstall_packages(requirements_file: str, dry_run: bool = False) -> int:
-    """Uninstall packages from a requirements file using pip"""
+    """Uninstall packages from a requirements file using pip.
+
+    Args:
+        requirements_file: Path to requirements file
+        dry_run: If True, only preview without uninstalling (default: False)
+
+    Returns:
+        Exit code (0 for success, non-zero for errors)
+    """
     logger = logging.getLogger("midna")
 
     try:
@@ -24,7 +32,15 @@ def uninstall_packages(requirements_file: str, dry_run: bool = False) -> int:
 
 
 def _uninstall_package_list(packages: List[str], dry_run: bool = False) -> int:
-    """Internal function to uninstall a list of packages"""
+    """Internal function to uninstall a list of packages.
+
+    Args:
+        packages: List of package names to uninstall
+        dry_run: If True, only preview without uninstalling (default: False)
+
+    Returns:
+        Exit code (0 for success, non-zero for errors)
+    """
     logger = logging.getLogger("midna")
 
     if not packages:
@@ -74,7 +90,17 @@ def _uninstall_package_list(packages: List[str], dry_run: bool = False) -> int:
 def check_packages_to_uninstall(
     requirements_file: str,
 ) -> Tuple[List[str], List[str]]:
-    """Check which packages from a requirements file are installed."""
+    """Check which packages from a requirements file are installed.
+
+    Args:
+        requirements_file: Path to requirements file
+
+    Returns:
+        Tuple of two lists: (installed_packages, not_installed_packages)
+
+    Raises:
+        FileNotFoundError: If the requirements file doesn't exist
+    """
     logger = logging.getLogger("midna")
     logger.info("Checking packages for uninstallation...")
 

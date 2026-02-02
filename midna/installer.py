@@ -6,7 +6,15 @@ from typing import List
 
 
 def install_packages(packages: List[str], dry_run: bool = False) -> int:
-    """Install packages using pip"""
+    """Install packages using pip.
+
+    Args:
+        packages: List of package names to install
+        dry_run: If True, only preview without installing (default: False)
+
+    Returns:
+        Exit code (0 for success, 1 for failure)
+    """
     logger = logging.getLogger("midna")
 
     if not packages:

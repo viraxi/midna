@@ -10,7 +10,14 @@ from .package_classifier import classify_packages
 
 
 def find_requirements_files(directory: str = ".") -> List[str]:
-    """Find requirements files in the given directory"""
+    """Find requirements files in the given directory.
+
+    Args:
+        directory: Path to directory to search (default: current directory)
+
+    Returns:
+        List of paths to found requirements files
+    """
     logger = logging.getLogger("midna")
 
     # Common requirements file patterns
@@ -44,7 +51,14 @@ def find_requirements_files(directory: str = ".") -> List[str]:
 
 
 def extract_imports_from_file(file_path: str) -> Set[str]:
-    """Extract import statements from a Python file"""
+    """Extract import statements from a Python file.
+
+    Args:
+        file_path: Path to the Python file to analyze
+
+    Returns:
+        Set of imported top-level package names
+    """
     logger = logging.getLogger("midna")
     imports: Set[str] = set()
 
@@ -76,7 +90,14 @@ def extract_imports_from_file(file_path: str) -> Set[str]:
 
 
 def find_python_files(directory: str = ".") -> List[str]:
-    """Find all Python files in directory and subdirectories"""
+    """Find all Python files in directory and subdirectories.
+
+    Args:
+        directory: Root directory to search (default: current directory)
+
+    Returns:
+        List of paths to Python (.py) files, excluding common build/cache directories
+    """
     python_files = []
 
     # Skip common directories that shouldn't be scanned
@@ -109,7 +130,14 @@ def find_python_files(directory: str = ".") -> List[str]:
 
 
 def analyze_project_imports(directory: str = ".") -> Set[str]:
-    """Analyze all Python files in project to find imported packages"""
+    """Analyze all Python files in project to find imported packages.
+
+    Args:
+        directory: Root directory to analyze (default: current directory)
+
+    Returns:
+        Set of third-party package names found in imports
+    """
     logger = logging.getLogger("midna")
     logger.info(f"Analyzing Python files in: {directory}")
 
@@ -134,7 +162,14 @@ def analyze_project_imports(directory: str = ".") -> Set[str]:
 
 
 def filter_standard_library(imports: Set[str]) -> Set[str]:
-    """Filter out Python standard library modules"""
+    """Filter out Python standard library modules.
+
+    Args:
+        imports: Set of import names to filter
+
+    Returns:
+        Set of non-stdlib package names
+    """
 
     # Common standard library modules (not exhaustive but covers most)
     stdlib_modules = {
@@ -227,8 +262,15 @@ def filter_standard_library(imports: Set[str]) -> Set[str]:
 def auto_discover_requirements(
     directory: str = ".",
 ) -> Tuple[List[Tuple[str, str]], str]:
-    """
-    Auto-discover requirements using multiple strategies
+    """Auto-discover requirements using multiple strategies.
+
+    Tries the following strategies in order:
+    1. Look for existing requirements files
+    2. Analyze Python files for imports
+    3. Return empty if nothing found
+
+    Args:
+        directory: Root directory to analyze (default: current directory)
 
     Returns:
         Tuple of (packages_list, discovery_method) where packages_list contains
@@ -283,7 +325,11 @@ def auto_discover_requirements(
 
 
 def get_discovery_mode_choice() -> str:
-    """Ask user which discovery mode to use"""
+    """Ask user which discovery mode to use.
+
+    Returns:
+        User's choice as a string
+    """
     print("\nMidna Auto-Discovery Options:")
     print("1. Search for requirements files (requirements.txt, etc.)")
     print("2. Analyze Python files for imported packages")

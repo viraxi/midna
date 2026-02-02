@@ -1,9 +1,14 @@
+[![PyPI version](https://badge.fury.io/py/midna.svg)](https://badge.fury.io/py/midna)
+[![Python versions](https://img.shields.io/pypi/pyversions/midna.svg)](https://pypi.org/project/midna/)
 [![codecov](https://codecov.io/gh/jassem-manita/midna/branch/main/graph/badge.svg)](https://codecov.io/gh/jassem-manita/midna)
 [![Security Scan](https://github.com/jassem-manita/midna/workflows/Security%20Scanning/badge.svg)](https://github.com/jassem-manita/midna/actions)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/jassem-manita/midna/blob/main/LICENSE)
 
 # Midna - The Smart Python Package Assistant
 
-An intelligent tool that automatically manages your Python dependencies by analyzing your actual code usage.
+**A CLI tool that automatically manages your Python dependencies by analyzing your actual code usage.**
+
+> **Note**: Midna is a command-line tool, not a Python library. Install it with `pip install midna` and use it as a CLI command.
 
 ## What is Midna?
 
@@ -158,18 +163,93 @@ midna/
 
 - Python 3.8 or newer
 - pip (comes with Python)
-- That's it - no external dependencies
+- That's it - no external dependencies (only `tomli` for TOML parsing)
+
+## Development Setup
+
+Want to contribute or modify Midna? Here's how to set up your development environment:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/jassem-manita/midna.git
+cd midna
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+### 3. Install in editable mode with dev dependencies
+
+```bash
+pip install -e ".[dev]"
+```
+
+This installs:
+- `pytest` and `pytest-cov` for testing
+- `black`, `flake8`, `isort`, `mypy` for code quality
+- `build` and `twine` for packaging
+
+### 4. Run tests
+
+```bash
+# Run all tests
+pytest tests/
+
+# Run with coverage
+pytest tests/ --cov=midna --cov-report=html
+
+# Run security checks
+bandit -r midna/ -x tests,test
+pip-audit
+```
+
+### 5. Code formatting
+
+```bash
+# Format code
+black midna/ tests/
+isort midna/ tests/
+
+# Check linting
+flake8 midna/ tests/ --max-line-length=100
+```
 
 ## Contributing
 
-Found a bug or want to add a feature?
+We welcome contributions! Whether it's bug fixes, new features, documentation improvements, or suggestions, your help is appreciated.
 
-1. Fork it
-2. Create a branch: `git checkout -b my-feature`
-3. Install dev dependencies: `pip install -e ".[dev]"`
-4. Run tests: `pytest tests/`
-5. Run security checks: `bandit -r midna/ -x tests,test`
-6. Submit a PR
+### Quick Start for Contributors
+
+1. **Fork the repository** on GitHub
+2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
+3. **Make your changes** following our code style guidelines
+4. **Run tests and checks**: Ensure all tests pass and code is formatted
+5. **Commit your changes**: Use conventional commit messages
+6. **Submit a Pull Request** with a clear description
+
+### Detailed Guidelines
+
+For comprehensive contribution guidelines, including:
+- Development environment setup
+- Code style and formatting rules
+- Testing procedures
+- Commit message conventions
+- Pull request process
+
+Please see [CONTRIBUTING.md](https://github.com/jassem-manita/midna/blob/main/CONTRIBUTING.md).
+
+### Reporting Issues
+
+Found a bug or have a feature request? [Open an issue](https://github.com/jassem-manita/midna/issues/new) with:
+- Clear description of the problem or feature
+- Steps to reproduce (for bugs)
+- Expected vs actual behavior
+- Your environment (Python version, OS)
 
 All contributions are automatically tested for security issues using Bandit and pip-audit.
 

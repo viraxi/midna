@@ -7,7 +7,15 @@ from pathlib import Path
 def setup_logging(
     verbose: bool = False, enable_file_logging: bool = False
 ) -> logging.Logger:
-    """Set up logging for Midna with optional file and console output"""
+    """Set up logging for Midna with optional file and console output.
+
+    Args:
+        verbose: If True, enable console logging at INFO level (default: False)
+        enable_file_logging: If True, enable file logging at DEBUG level (default: False)
+
+    Returns:
+        Configured logger instance
+    """
     logger = logging.getLogger("midna")
     logger.setLevel(logging.DEBUG)
     logger.handlers.clear()

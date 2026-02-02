@@ -1,10 +1,10 @@
+import importlib.metadata
 import os
 import subprocess
 import sys
 import tempfile
 import unittest
 import unittest.mock
-import importlib.metadata
 from unittest.mock import Mock
 
 from midna import checker, installer, parser, uninstaller
