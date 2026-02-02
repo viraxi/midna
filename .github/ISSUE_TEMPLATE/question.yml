@@ -1,0 +1,56 @@
+name: Question
+description: Ask a question about Midna
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about how to use Midna? Ask away!
+        
+        Before submitting, please check:
+        - [README](https://github.com/jassem-manita/midna/blob/main/README.md) for usage instructions
+        - [Existing discussions](https://github.com/jassem-manita/midna/discussions) for similar questions
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: How do I...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide any relevant context about your question
+      placeholder: I'm trying to... and I need to...
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What Have You Tried?
+      description: Let us know what you've already attempted
+      placeholder: I tried... but...
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment (if relevant)
+      description: Information about your environment
+      value: |
+        - OS: [e.g., Ubuntu 22.04, macOS 13, Windows 11]
+        - Python version: [e.g., 3.11.5]
+        - Midna version: [e.g., 1.0.6]
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have checked the README and documentation
+          required: true
+        - label: I have searched existing issues and discussions
+          required: true

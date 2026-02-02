@@ -253,6 +253,10 @@ Found a bug or have a feature request? [Open an issue](https://github.com/jassem
 
 All contributions are automatically tested for security issues using Bandit and pip-audit.
 
+### Code of Conduct
+
+This project adheres to a [Code of Conduct](https://github.com/jassem-manita/midna/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to jasemmanita00 [at] gmail.com.
+
 ## License
 
 Apache 2.0 - see [LICENSE](https://github.com/jassem-manita/midna/blob/main/LICENSE)
