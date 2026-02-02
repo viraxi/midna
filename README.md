@@ -1,9 +1,5 @@
-[![PyPI version](https://badge.fury.io/py/midna.svg)](https://badge.fury.io/py/midna)
 [![Downloads](https://static.pepy.tech/badge/midna)](https://pepy.tech/project/midna)
-[![Python versions](https://img.shields.io/pypi/pyversions/midna.svg)](https://pypi.org/project/midna/)
-[![Tests](https://github.com/jassem-manita/midna/workflows/Tests/badge.svg)](https://github.com/jassem-manita/midna/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/jassem-manita/midna/branch/main/graph/badge.svg)](https://codecov.io/gh/jassem-manita/midna)
-[![Security Scan](https://github.com/jassem-manita/midna/workflows/Security%20Scanning/badge.svg)](https://github.com/jassem-manita/midna/actions)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/jassem-manita/midna/blob/main/LICENSE)
 
 # Midna - The Smart Python Package Assistant
