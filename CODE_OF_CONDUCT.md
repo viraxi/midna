@@ -19,4 +19,4 @@ We are committed to providing a welcoming and respectful environment for everyon
 
 ## Reporting
 
-If you experience or witness unacceptable behavior, please contact the project maintainer at jasemmanita00 [at] gmail.com. All reports will be handled with discretion.
+If you experience or witness unacceptable behavior, please contact the project maintainer at jasemmanita@viraxi.tech or the organization at contact@viraxi.tech. All reports will be handled with discretion.

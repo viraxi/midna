@@ -9,7 +9,8 @@ description = "Smart pip requirements installer - Midna manages your installatio
 readme = { file = "README.md", content-type = "text/markdown" }
 license = "Apache-2.0"
 authors = [
-    {name = "Jassem Manita", email = "jasemmanita00@gmail.com"}
+    {name = "Jassem Manita", email = "jasemmanita@viraxi.tech"},
+    {name = "Viraxi Organization", email = "contact@viraxi.tech"}
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -41,9 +42,9 @@ dev = [
 keywords = ["pip", "requirements", "installer", "package", "management"]
 
 [project.urls]
-Homepage = "https://github.com/jassem-manita/midna"
-Repository = "https://github.com/jassem-manita/midna"
-Issues = "https://github.com/jassem-manita/midna/issues"
+Homepage = "https://github.com/viraxi/midna"
+Repository = "https://github.com/viraxi/midna"
+Issues = "https://github.com/viraxi/midna/issues"
 
 [project.scripts]
 midna = "midna.core:main"

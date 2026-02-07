@@ -1,6 +1,6 @@
 [![Downloads](https://static.pepy.tech/badge/midna)](https://pepy.tech/project/midna)
-[![codecov](https://codecov.io/gh/jassem-manita/midna/branch/main/graph/badge.svg)](https://codecov.io/gh/jassem-manita/midna)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/jassem-manita/midna/blob/main/LICENSE)
+![codecov](https://codecov.io/gh/viraxi/midna/branch/main/graph/badge.svg)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/viraxi/midna/blob/main/LICENSE)
 
 # Midna - The Smart Python Package Assistant
 
@@ -117,9 +117,9 @@ Midna implements automated security scanning to ensure safe package management:
 - **Secure Subprocess Execution** - Explicit `shell=False` in all pip calls
 - **Minimal Attack Surface** - Only `tomli` dependency for TOML parsing
 
-Security reports are automatically generated and can be found in the [Actions tab](https://github.com/jassem-manita/midna/actions).
+Security reports are automatically generated and can be found in the [Actions tab](https://github.com/viraxi/midna/actions).
 
-For security-related issues, please see [SECURITY.md](https://github.com/jassem-manita/midna/blob/main/SECURITY.md).
+For security-related issues, please see [SECURITY.md](https://github.com/viraxi/midna/blob/main/SECURITY.md).
 
 ## Use cases
 
@@ -170,7 +170,7 @@ Want to contribute or modify Midna? Here's how to set up your development enviro
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/jassem-manita/midna.git
+git clone https://github.com/viraxi/midna.git
 cd midna
 ```
 
@@ -239,11 +239,11 @@ For comprehensive contribution guidelines, including:
 - Commit message conventions
 - Pull request process
 
-Please see [CONTRIBUTING.md](https://github.com/jassem-manita/midna/blob/main/CONTRIBUTING.md).
+Please see [CONTRIBUTING.md](https://github.com/viraxi/midna/blob/main/CONTRIBUTING.md).
 
 ### Reporting Issues
 
-Found a bug or have a feature request? [Open an issue](https://github.com/jassem-manita/midna/issues/new) with:
+Found a bug or have a feature request? [Open an issue](https://github.com/viraxi/midna/issues/new) with:
 - Clear description of the problem or feature
 - Steps to reproduce (for bugs)
 - Expected vs actual behavior
@@ -253,14 +253,15 @@ All contributions are automatically tested for security issues using Bandit and 
 
 ### Code of Conduct
 
-This project adheres to a [Code of Conduct](https://github.com/jassem-manita/midna/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to jasemmanita00 [at] gmail.com.
+This project adheres to a [Code of Conduct](https://github.com/viraxi/midna/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to jasemmanita@viraxi.tech or contact@viraxi.tech.
 
 ## License
 
-Apache 2.0 - see [LICENSE](https://github.com/jassem-manita/midna/blob/main/LICENSE)
+Apache 2.0 - see [LICENSE](https://github.com/viraxi/midna/blob/main/LICENSE)
 
 ## Author
 
 Jassem Manita  
-GitHub: [@jassem-manita](https://github.com/jassem-manita)  
-Email: jasemmanita00 [at] gmail.com
+GitHub: [@viraxi](https://github.com/viraxi)
+Maintainer Email: jasemmanita@viraxi.tech
+Org Contact: contact@viraxi.tech
