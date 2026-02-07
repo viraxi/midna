@@ -98,3 +98,8 @@ logs/
 *.tmp
 *.temp
 .~*
+# Verification and analysis reports
+verification-reports/
+
+# Wiki 
+wiki/

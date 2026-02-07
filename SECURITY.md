@@ -2,12 +2,14 @@
 
 ## Reporting Security Vulnerabilities
 
+
 If you discover a security vulnerability in Midna, please help us by reporting it responsibly.
 
 **Please do NOT report security vulnerabilities through public GitHub issues.**
 
 Instead, please report security vulnerabilities by emailing:
-- **Email**: [jasemmanita00@gmail.com](mailto:jasemmanita00@gmail.com)
+- **Maintainer Email**: [jasemmanita@viraxi.tech](mailto:jasemmanita@viraxi.tech)
+- **Org Contact**: [contact@viraxi.tech](mailto:contact@viraxi.tech)
 - **Subject**: `[SECURITY] Midna Vulnerability Report`
 
 ### What to Include
