@@ -47,17 +47,6 @@ def is_stdlib_package(package_name: str) -> bool:
     if package_name in sys.builtin_module_names:
         return True
 
-    # Check if it's in standard library paths
-    try:
-        spec = importlib.util.find_spec(package_name)
-        if spec and spec.origin:
-            return (
-                "stdlib" in str(spec.origin).lower()
-                or "python" in str(spec.origin).lower()
-            )
-    except (ImportError, AttributeError):
-        pass
-
     return False
 
 
@@ -145,8 +134,8 @@ def classify_packages(
             project_packages.append(package)
         else:
             version = get_package_version(base_package)
-            if version:  # Only include if it's an installed package
-                third_party_packages.append((base_package, version))
+            # Include all detected third-party packages, even if not installed
+            third_party_packages.append((base_package, version))
 
     return (
         sorted(set(stdlib_packages)),  # Remove duplicates
