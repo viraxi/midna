@@ -4,6 +4,7 @@ import importlib.metadata
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
+from .discovery import auto_discover_requirements, extract_imports_from_file
 from .checker import check_installed_packages
 from .discovery import auto_discover_requirements
 from .installer import install_packages
@@ -123,10 +124,16 @@ def main() -> int:
     try:
         # Determine how to get packages
         if args.requirements_file:
-            # Traditional mode: use specified file
-            packages = read_requirements(args.requirements_file)
-            source_info = f"file: {args.requirements_file}"
-            logger.info(f"Using specified file: {args.requirements_file}")
+            if args.requirements_file.endswith(".py"):
+                # New: Use import extraction for Python files
+                packages = list(extract_imports_from_file(args.requirements_file))
+                source_info = f"imports from: {args.requirements_file}"
+                logger.info(f"Extracted imports from Python file: {args.requirements_file}")
+            else:
+                # Traditional mode: use specified file
+                packages = read_requirements(args.requirements_file)
+                source_info = f"file: {args.requirements_file}"
+                logger.info(f"Using specified file: {args.requirements_file}")
         else:
             # Auto-discovery mode
             print("Auto-discovering requirements...")
