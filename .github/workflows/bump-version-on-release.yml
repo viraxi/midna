@@ -30,9 +30,24 @@ jobs:
           VERSION="${{ steps.get_version.outputs.version }}"
           sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
 
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: bump version to ${{ steps.get_version.outputs.version }} [skip ci]"
-          file_pattern: pyproject.toml
-          push_options: --force
+      - name: Checkout or create version-bump branch
+        run: |
+          git fetch origin version-bump || true
+          if git show-ref --verify --quiet refs/remotes/origin/version-bump; then
+            git checkout version-bump
+            git reset --hard origin/version-bump
+          else
+            git checkout -b version-bump
+          fi
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pyproject.toml
+          VERSION="${{ steps.get_version.outputs.version }}"
+          git commit -m "chore: bump version to $VERSION [skip ci]" || echo "No changes to commit."
+
+      - name: Push version-bump branch
+        run: |
+          git push origin version-bump
