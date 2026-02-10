@@ -6,8 +6,10 @@ import tempfile
 import unittest
 import unittest.mock
 from unittest.mock import Mock
+from argparse import ArgumentParser
 
 from midna import checker, installer, parser, uninstaller
+from midna.core import create_parser, _handle_install, _handle_uninstall
 
 
 class TestMidnaFunctionality(unittest.TestCase):
@@ -52,6 +54,35 @@ class TestMidnaFunctionality(unittest.TestCase):
         missing, installed = checker.check_installed_packages([])
         self.assertIsInstance(missing, list)
         self.assertIsInstance(installed, list)
+
+
+class TestMidnaCore(unittest.TestCase):
+    def test_create_parser(self) -> None:
+        """Test that the parser is created correctly."""
+        parser = create_parser()
+        self.assertIsInstance(parser, ArgumentParser)
+
+    @unittest.mock.patch("midna.core.check_packages_to_uninstall")
+    @unittest.mock.patch("midna.core.uninstall_packages")
+    def test_handle_uninstall(
+        self, mock_uninstall_packages: Mock, mock_check_packages: Mock
+    ) -> None:
+        """Test the _handle_uninstall function."""
+        mock_check_packages.return_value = (["requests"], ["numpy"])
+        mock_uninstall_packages.return_value = 0
+        result = _handle_uninstall(["requests", "numpy"], False)
+        self.assertEqual(result, 0)
+
+    @unittest.mock.patch("midna.core.check_installed_packages")
+    @unittest.mock.patch("midna.core.install_packages")
+    def test_handle_install(
+        self, mock_install_packages: Mock, mock_check_packages: Mock
+    ) -> None:
+        """Test the _handle_install function."""
+        mock_check_packages.return_value = (["requests"], ["numpy"])
+        mock_install_packages.return_value = 0
+        result = _handle_install(["requests", "numpy"], False)
+        self.assertEqual(result, 0)
 
 
 class TestMidnaCLI(unittest.TestCase):
