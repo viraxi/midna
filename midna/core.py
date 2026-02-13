@@ -98,6 +98,94 @@ def create_parser() -> ArgumentParser:
     return parser
 
 
+def _handle_uninstall(packages: list[str], dry_run: bool) -> int:
+    """Handle the uninstallation of packages.
+    
+    Args:
+        packages: A list of packages to uninstall.
+        dry_run: If True, preview the packages to be uninstalled without
+            actually uninstalling them.
+            
+    Returns:
+        An exit code (0 for success, non-zero for errors).
+    """
+    # For auto-discovered packages, create temp file
+    import tempfile
+
+    with tempfile.NamedTemporaryFile(
+        mode="w", suffix=".txt", delete=False
+    ) as temp_file:
+        temp_file.write("\n".join(packages))
+        temp_path = temp_file.name
+
+    try:
+        found_packages, not_found_packages = (
+            check_packages_to_uninstall(temp_path)
+        )
+    finally:
+        import os
+        os.unlink(temp_path)
+
+    if not_found_packages:
+        print(f"\nNot installed ({len(not_found_packages)} packages):")
+        for package in not_found_packages:
+            print(f"  - {package}")
+    if not found_packages:
+        print("\nNo packages to uninstall (none are installed)!")
+        return 0
+    print(f"\nWill uninstall ({len(found_packages)} packages):")
+    for package in found_packages:
+        print(f"  - {package}")
+
+    # Create temp file for uninstaller
+    import tempfile
+
+    with tempfile.NamedTemporaryFile(
+        mode="w", suffix=".txt", delete=False
+    ) as temp_file:
+        temp_file.write("\n".join(found_packages))
+        temp_path = temp_file.name
+
+    try:
+        exit_code = uninstall_packages(temp_path, dry_run)
+    finally:
+        import os
+        os.unlink(temp_path)
+
+    return exit_code
+
+
+def _handle_install(packages: list[str], dry_run: bool) -> int:
+    """Handle the installation of packages.
+    
+    Args:
+        packages: A list of packages to install.
+        dry_run: If True, preview the packages to be installed without
+            actually installing them.
+            
+    Returns:
+        An exit code (0 for success, non-zero for errors).
+    """
+    missing_packages, already_installed = check_installed_packages(
+        packages
+    )
+    if already_installed:
+        print(
+            f"\nAlready installed ({len(already_installed)} "
+            f"packages):"
+        )
+        for package in already_installed:
+            print(f"  + {package}")
+    if not missing_packages:
+        print("\nAll packages are already installed!")
+        return 0
+    print(f"\nWill install ({len(missing_packages)} packages):")
+    for package in missing_packages:
+        print(f"  - {package}")
+    exit_code = install_packages(missing_packages, dry_run)
+    return exit_code
+
+
 def main() -> int:
     """Main entry point for Midna CLI.
 
@@ -183,77 +271,10 @@ def main() -> int:
 
         if args.uninstall:
             # Handle uninstall mode
-            if args.requirements_file:
-                found_packages, not_found_packages = (
-                    check_packages_to_uninstall(args.requirements_file)
-                )
-            else:
-                # For auto-discovered packages, create temp file
-                import tempfile
-
-                with tempfile.NamedTemporaryFile(
-                    mode="w", suffix=".txt", delete=False
-                ) as temp_file:
-                    temp_file.write("\n".join(packages))
-                    temp_path = temp_file.name
-
-                try:
-                    found_packages, not_found_packages = (
-                        check_packages_to_uninstall(temp_path)
-                    )
-                finally:
-                    import os
-
-                    os.unlink(temp_path)
-
-            if not_found_packages:
-                print(f"\nNot installed ({len(not_found_packages)} packages):")
-                for package in not_found_packages:
-                    print(f"  - {package}")
-            if not found_packages:
-                print("\nNo packages to uninstall (none are installed)!")
-                return 0
-            print(f"\nWill uninstall ({len(found_packages)} packages):")
-            for package in found_packages:
-                print(f"  - {package}")
-
-            # Create temp file for uninstaller
-            import tempfile
-
-            with tempfile.NamedTemporaryFile(
-                mode="w", suffix=".txt", delete=False
-            ) as temp_file:
-                temp_file.write("\n".join(found_packages))
-                temp_path = temp_file.name
-
-            try:
-                exit_code = uninstall_packages(temp_path, args.dry_run)
-            finally:
-                import os
-
-                os.unlink(temp_path)
-
-            return exit_code
+            return _handle_uninstall(packages, args.dry_run)
         else:
             # Handle install mode
-            missing_packages, already_installed = check_installed_packages(
-                packages
-            )
-            if already_installed:
-                print(
-                    f"\nAlready installed ({len(already_installed)} "
-                    f"packages):"
-                )
-                for package in already_installed:
-                    print(f"  + {package}")
-            if not missing_packages:
-                print("\nAll packages are already installed!")
-                return 0
-            print(f"\nWill install ({len(missing_packages)} packages):")
-            for package in missing_packages:
-                print(f"  - {package}")
-            exit_code = install_packages(missing_packages, args.dry_run)
-            return exit_code
+            return _handle_install(packages, args.dry_run)
 
     except FileNotFoundError as e:
         print(f"ERROR: {e}")
