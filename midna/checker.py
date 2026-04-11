@@ -2,6 +2,7 @@
 
 import logging
 import subprocess
+import sys
 from typing import List, Set, Tuple
 
 from .parser import parse_package_name
@@ -27,7 +28,7 @@ def check_installed_packages(
     try:
         # Get list of installed packages
         result = subprocess.run(
-            ["pip", "list", "--format=freeze"],
+            [sys.executable, "-m", "pip", "list", "--format=freeze"],
             capture_output=True,
             text=True,
             check=True,

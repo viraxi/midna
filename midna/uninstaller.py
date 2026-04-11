@@ -2,6 +2,8 @@
 
 import logging
 import subprocess
+import sys
+
 from typing import List, Tuple
 
 from .parser import parse_package_name, read_requirements
@@ -65,7 +67,7 @@ def _uninstall_package_list(packages: List[str], dry_run: bool = False) -> int:
     package_names = [parse_package_name(pkg) for pkg in packages]
 
     # Uninstall packages
-    cmd = ["pip", "uninstall", "-y"] + package_names
+    cmd = [sys.executable, "-m", "pip", "uninstall", "-y"] + package_names
     logger.debug(f"Running command: {' '.join(cmd)}")
 
     try:
@@ -122,7 +124,7 @@ def _check_package_list_to_uninstall(
     try:
         # Get list of installed packages
         result = subprocess.run(
-            ["pip", "list", "--format=freeze"],
+            [sys.executable, "-m", "pip", "list", "--format=freeze"],
             capture_output=True,
             text=True,
             check=True,

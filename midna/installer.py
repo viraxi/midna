@@ -2,6 +2,7 @@
 
 import logging
 import subprocess
+import sys
 from typing import List
 
 
@@ -35,7 +36,7 @@ def install_packages(packages: List[str], dry_run: bool = False) -> int:
     logger.info(f"Starting installation of {len(packages)} packages")
 
     # Install packages
-    cmd = ["pip", "install"] + packages
+    cmd = [sys.executable, "-m", "pip", "install"] + packages
     logger.debug(f"Running command: {' '.join(cmd)}")
 
     try:

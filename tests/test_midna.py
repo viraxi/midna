@@ -121,7 +121,7 @@ class TestMidnaInstaller(unittest.TestCase):
         result = installer.install_packages(["requests", "numpy"])
         self.assertEqual(result, 0)
         mock_run.assert_called_once_with(
-            ["pip", "install", "requests", "numpy"],
+            [sys.executable, "-m", "pip", "install", "requests", "numpy"],
             check=True,
             capture_output=True,
             shell=False,
@@ -134,7 +134,7 @@ class TestMidnaInstaller(unittest.TestCase):
         result = installer.install_packages(["fake-package"])
         self.assertEqual(result, 1)
         mock_run.assert_called_once_with(
-            ["pip", "install", "fake-package"],
+            [sys.executable, "-m","pip", "install", "fake-package"],
             check=True,
             capture_output=True,
             shell=False,
@@ -211,7 +211,7 @@ class TestMidnaUninstaller(unittest.TestCase):
         result = uninstaller._uninstall_package_list(["requests", "numpy"])
         self.assertEqual(result, 0)
         mock_run.assert_called_once_with(
-            ["pip", "uninstall", "-y", "requests", "numpy"],
+            [sys.executable, "-m","pip", "uninstall", "-y", "requests", "numpy"],
             check=True,
             capture_output=True,
             shell=False,
@@ -224,7 +224,7 @@ class TestMidnaUninstaller(unittest.TestCase):
         result = uninstaller._uninstall_package_list(["fake-package"])
         self.assertEqual(result, 1)
         mock_run.assert_called_once_with(
-            ["pip", "uninstall", "-y", "fake-package"],
+            [sys.executable, "-m","pip", "uninstall", "-y", "fake-package"],
             check=True,
             capture_output=True,
             shell=False,
